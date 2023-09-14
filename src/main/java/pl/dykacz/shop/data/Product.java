@@ -1,22 +1,22 @@
 package pl.dykacz.shop.data;
 
-import pl.dykacz.shop.objects.Money;
-import pl.dykacz.shop.objects.Name;
+import pl.dykacz.shop.objects.MoneyObject;
+import pl.dykacz.shop.objects.NameObject;
 
 public class Product {
-    private final Name name;
-    private final Money price;
+    private final NameObject name;
+    private final MoneyObject price;
 
-    public Product(Name name,Money price){
+    public Product(NameObject name, MoneyObject price) {
         this.name = name;
         this.price = price;
     }
 
-    public Money getPrice() {
+    public MoneyObject getPrice() {
         return price;
     }
 
-    public Name getName() {
+    public NameObject getName() {
         return name;
     }
 

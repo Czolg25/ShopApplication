@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import pl.dykacz.shop.configuration.Configuration;
-import pl.dykacz.shop.objects.Money;
+import pl.dykacz.shop.objects.MoneyObject;
 
 @Component
 @Profile("START")
-public class StartBasketCalculator extends BasketCalculator{
+public class StartBasketCalculator extends BasketCalculator {
 
     @Autowired
     public StartBasketCalculator(Configuration configuration) throws IllegalArgumentException {
@@ -16,7 +16,7 @@ public class StartBasketCalculator extends BasketCalculator{
     }
 
     @Override
-    public Money calculate(Money price) {
+    public MoneyObject calculate(MoneyObject price) {
         return price;
     }
 }

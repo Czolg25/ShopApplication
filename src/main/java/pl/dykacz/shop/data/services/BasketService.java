@@ -8,8 +8,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import pl.dykacz.shop.calculators.BasketCalculator;
 import pl.dykacz.shop.data.Product;
-import pl.dykacz.shop.objects.Money;
-import pl.dykacz.shop.objects.Name;
+import pl.dykacz.shop.objects.MoneyObject;
+import pl.dykacz.shop.objects.NameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +24,26 @@ public class BasketService {
     private List<Product> products;
 
     @Autowired
-    public BasketService(BasketCalculator basketCalculator){
+    public BasketService(BasketCalculator basketCalculator) {
         this.basketCalculator = basketCalculator;
         this.logger = LoggerFactory.getLogger(BasketService.class);
         this.products = getRandomProducts(5);
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void get(){
+    public void get() {
         this.logger.info(products.toString());
         this.logger.info(calculateSumNormalPrice().toString());
         this.logger.info(calculateSumPrice().toString());
     }
 
-    public Money calculateSumPrice(){
-        Money price = calculateSumNormalPrice();
+    public MoneyObject calculateSumPrice() {
+        MoneyObject price = calculateSumNormalPrice();
         return this.basketCalculator.calculate(price);
     }
 
-    private Money calculateSumNormalPrice(){
-        Money price = new Money(0);
+    private MoneyObject calculateSumNormalPrice() {
+        MoneyObject price = new MoneyObject(0);
 
         for (Product product : this.products) {
             price = price.add(product.getPrice());
@@ -52,13 +52,13 @@ public class BasketService {
         return price;
     }
 
-    private List<Product> getRandomProducts(int number){
+    private List<Product> getRandomProducts(int number) {
         List<Product> products = new ArrayList<>();
 
         for (int i = 0; i < number; i++) {
-            Name name = new Name("Product "+i);
-            Money money = new Money(RANDOM.nextInt(250)+50,RANDOM.nextInt(100));
-            Product product = new Product(name,money);
+            NameObject name = new NameObject("Product " + i);
+            MoneyObject money = new MoneyObject(RANDOM.nextInt(250) + 50, RANDOM.nextInt(100));
+            Product product = new Product(name, money);
             products.add(product);
         }
 
